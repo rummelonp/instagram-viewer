@@ -3,21 +3,35 @@
 <div id="content" class="hfeed">
   <% @photos.each do |photo| %>
   <div class="post hentry">
-    <div class="content entry-content">
-      <% min = photo.images.first %>
-      <% max = photo.images.last %>
+    <% min = photo.images.first %>
+    <% max = photo.images.last %>
+    <div class="thumbnail entry-summary">
       <div class="photo">
         <%= link_to (image_tag min.url), max.url, :rel => 'bookmark' %>
       </div>
     </div>
-    <div class="full_name author">
-      <%= photo.user.full_name %>
-    </div>
-    <div class="caption entry-title">
-      <%= photo.caption %>
-    </div>
-    <div class="token_at updated">
-      <%= photo.taken_at %>
+    <div class="full entry-content">
+      <div class="photo">
+        <%= link_to (image_tag max.url), max.url %>
+      </div>      
+      <div class="full_name author">
+        <%= photo.user.full_name %>
+      </div>
+      <div class="caption entry-title">
+        <%= photo.caption %>
+      </div>
+      <div class="comments">
+        <% photo.comments.each do |comment| %>
+        <p class="comment">
+          <span class="text"><%= comment.text %></span>
+          <span class="full_name"><%= comment.user.full_name %></span>
+          <span class="created_at"><%= comment.created_at %></span>
+        </p>
+        <% end %>
+      </div>
+      <div class="token_at updated">
+        <%= photo.taken_at %>
+      </div>
     </div>
   </div>
   <% end %>
