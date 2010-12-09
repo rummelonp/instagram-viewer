@@ -1,57 +1,5 @@
 <h1>だらみいんすたぐらむ</h1>
 <h2>ゆーざー</h2>
 <div id="content" class="hfeed">
-  <% @photos.each do |photo| %>
-  <div class="post hentry">
-    <% min = photo.images.first %>
-    <% mid = photo.images.at 1 %>
-    <% max = photo.images.last %>
-    <div class="thumbnail entry-summary">
-      <div class="photo">
-        <%= link_to (image_tag min.url,
-                     :width => min.width,
-                     :height => min.height,
-                     :alt => photo.caption,
-                     :title => photo.caption),
-            max.url,
-            :rel => 'bookmark' %>
-      </div>
-    </div>
-    <div class="full entry-content">
-      <div class="photo">
-        <%= link_to (image_tag '',
-                     :rel => mid.url,
-                     :width => mid.width,
-                     :heigth => mid.height,
-                     :alt => photo.caption,
-                     :title => photo.caption),
-            max.url %>
-      </div>
-      <div class="full_name author">
-        <%= link_to photo.user.full_name, :action => :user, :id => photo.user.id %>
-      </div>
-      <div class="caption entry-title">
-        <%= photo.caption %>
-      </div>
-      <div class="token_at updated">
-        <%= photo.taken_at.strftime('%Y/%m/%d %H:%M') %>
-      </div>
-      <div class="comments">
-        <% photo.comments.each do |comment| %>
-        <p class="comment">
-          <span class="text">
-            <%= comment.text %>
-          </span>
-          <span class="full_name">
-            <%= comment.user.full_name %>
-          </span>
-          <span class="created_at">
-            <%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
-          </span>
-        </p>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <% end %>
+<%= render :partial => 'photos', :object => @photos %>
 </div>
