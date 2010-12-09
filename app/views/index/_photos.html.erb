@@ -6,26 +6,26 @@
   <div class="thumbnail entry-summary">
     <div class="photo">
       <%= link_to (image_tag min.url,
-          :width => min.width,
-      :height => min.height,
-      :alt => photo.caption,
-      :title => photo.caption),
-      max.url,
-      :rel => 'bookmark' %>
+                   :width => min.width,
+                   :height => min.height,
+                   :alt => photo.caption,
+                   :title => photo.caption),
+                  max.url,
+                  :rel => 'bookmark' %>
     </div>
   </div>
   <div class="full entry-content">
     <div class="photo">
       <%= link_to (image_tag '',
-          :rel => mid.url,
-      :width => mid.width,
-      :heigth => mid.height,
-      :alt => photo.caption,
-      :title => photo.caption),
-      max.url %>
+                   :rel => mid.url,
+                   :width => mid.width,
+                   :heigth => mid.height,
+                   :alt => photo.caption,
+                   :title => photo.caption),
+                  max.url %>
     </div>
     <div class="full_name author">
-      <%= link_to photo.user.full_name, :action => :user, :id => photo.user.id %>
+      <%= link_to photo.user.full_name, "/user/#{photo.user.id}" %>
     </div>
     <div class="caption entry-title">
       <%= photo.caption %>
