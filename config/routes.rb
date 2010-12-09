@@ -1,4 +1,5 @@
 Instagram::Application.routes.draw do
+
   root :to => "index#index"
 
   get "user/:id" => "index#user"
