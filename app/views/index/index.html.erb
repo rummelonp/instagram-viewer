@@ -1,2 +1,24 @@
 <h1>だらみいんすたぐらむ</h1>
 <h2>ぽぴゅらー</h2>
+<div id="content" class="hfeed">
+  <% @photos.each do |photo| %>
+  <div class="post hentry">
+    <div class="content entry-content">
+      <% min = photo.images.first %>
+      <% max = photo.images.last %>
+      <div class="photo">
+        <%= link_to (image_tag min.url), max.url, :rel => 'bookmark' %>
+      </div>
+    </div>
+    <div class="full_name author">
+      <%= photo.user.full_name %>
+    </div>
+    <div class="caption entry-title">
+      <%= photo.caption %>
+    </div>
+    <div class="token_at updated">
+      <%= photo.taken_at %>
+    </div>
+  </div>
+  <% end %>
+</div>
