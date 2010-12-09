@@ -1,17 +1,4 @@
-
 (function() {
-
-  const isDebug = true;
-
-  var log = function() {
-    if (isDebug && window.console) {
-      if (console.debug) {
-        return console.debug;
-      }
-      return console.log;
-    }
-    return Prototype.K;
-  }();
 
   var getParentElementByAttributeRegExp = function(element, attribute, regexp) {
     var parent_element = $(element);
@@ -34,17 +21,34 @@
     post.writeAttribute('id', 'full');
   };
 
+  var showFullPostFirst = function() {
+    var post = $$('.post').first();
+    showFullPost(post);
+  };
+
   var onClickDocument = function(event) {
     var target = $(event.target);
-    log(event, target);
 
     var photo = target.getParentElementByAttributeRegExp('class', /thumbnail/);
     if (photo) {
       event.stop();
       var post = photo.getParentElementByAttributeRegExp('class', /post/);
       showFullPost(post);
-    };
+    }
   };
+
+  var loadFullPhoto = function() {
+    var addSrcFromRel = function(element) {
+      element.writeAttribute('src', element.readAttribute('rel'));
+    };
+    return function() {
+      $$('.full ..photo img').each(addSrcFromRel);
+    };
+  }();
+
+  document.observe('dom:loaded', showFullPostFirst, false);
+
+  Event.observe(window, 'load', loadFullPhoto, false);
 
   document.observe('click', onClickDocument.bindAsEventListener(), false);
 

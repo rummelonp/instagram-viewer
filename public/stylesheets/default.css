@@ -1,0 +1,14 @@
+* { margin: 0; padding: 0; color:#333333; line-height:1.5; font-family:Arial, Helvetica, sans-serif; }
+body { margin: 20px 40px; font-size: 90%; }
+a { color: #408888; }
+img { border: none; }
+#content { margin-top: 20px; width: 800px; position: relative; }
+.post { width: 160px; float: left; }
+.full { display: none; }
+#full .full { display: block; width: 310px; position: absolute; top: 0; left: 100%; }
+.caption { margin-top: 10px; }
+.token_at { color: #aaaaaa; }
+.comments { margin-top: 10px; }
+.comment { margin-top: 5px; }
+.comment .full_name { color: #408888; }
+.comment .created_at { color: #aaaaaa; }
