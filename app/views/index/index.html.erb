@@ -1,5 +1,7 @@
-<h1>だらみいんすたぐらむ</h1>
-<h2>ぽぴゅらー</h2>
+<div id="header">
+  <h1><%= link_to 'Instagram Viewer', '/' %></h1>
+  <h2>Pppular Photos</h2>
+</div>
 <div id="content" class="hfeed">
 <%= render :partial => 'photos', :object => @photos %>
 </div>

@@ -2,14 +2,18 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>だらみいんすたぐらむ</title>
+<title>Instagram Viewer</title>
 <%= stylesheet_link_tag :all %>
 <!--[if IE]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-<%= javascript_include_tag 'prototype', 'application' %>
+<%= javascript_include_tag 'application' %>
 </head>
 <body>
 <%= yield %>
+<div id="footer">
+  &copy;2010 <%= link_to 'Instagram', 'http://instagr.am/' %> |
+  @<%= link_to 'mitukiii', 'http://twitter.com/mitukiii' %> at <%= link_to 'mitukiii.jp', 'http://mitukiii.jp' %>
+</div>
 </body>
 </html>
