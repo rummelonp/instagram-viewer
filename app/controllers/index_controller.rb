@@ -5,7 +5,8 @@ class IndexController < ApplicationController
   end
 
   def user
-    @photos = Instagram::by_user params[:id]
+    id = params.delete :id
+    @photos = Instagram::by_user id, params
   end
 
 end

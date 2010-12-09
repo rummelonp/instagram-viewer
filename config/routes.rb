@@ -3,6 +3,7 @@ Instagram::Application.routes.draw do
   root :to => "index#index"
 
   get "user/:id" => "index#user"
+  get "user/:id/max_id/:max_id" => "index#user"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

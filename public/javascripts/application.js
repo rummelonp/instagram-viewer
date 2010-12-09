@@ -27,9 +27,9 @@
   };
 
   var onClickDocument = function(event) {
-    var target = $(event.target);
+    var element = $(event.target);
 
-    var photo = target.getParentElementByAttributeRegExp('class', /thumbnail/);
+    var photo = element.getParentElementByAttributeRegExp('class', /thumbnail/);
     if (photo) {
       event.stop();
       var post = photo.getParentElementByAttributeRegExp('class', /post/);
@@ -41,14 +41,18 @@
     var addSrcFromRel = function(element) {
       element.writeAttribute('src', element.readAttribute('rel'));
     };
-    return function() {
+    return function(event) {
+      var element = $(event.target || document.body);
       $$('.full ..photo img').each(addSrcFromRel);
     };
   }();
 
+  var bindedLoadFullPhoto = loadFullPhoto.bindAsEventListener();
+
   document.observe('dom:loaded', showFullPostFirst, false);
 
-  Event.observe(window, 'load', loadFullPhoto, false);
+  Event.observe(window, 'load', bindedLoadFullPhoto, false);
+  document.observe('DOMNodeInserted', bindedLoadFullPhoto, false);
 
   document.observe('click', onClickDocument.bindAsEventListener(), false);
 

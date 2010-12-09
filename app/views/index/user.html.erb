@@ -2,4 +2,10 @@
 <h2>ゆーざー</h2>
 <div id="content" class="hfeed">
 <%= render :partial => 'photos', :object => @photos %>
+<p id="nav">
+  <% photo = @photos.last %>
+  <%= link_to "Next Photos",
+              "/user/#{photo.user.id}/max_id/#{photo.id}",
+              :rel => 'next' %>
+</p>
 </div>
