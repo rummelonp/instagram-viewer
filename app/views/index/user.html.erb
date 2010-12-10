@@ -1,12 +1,7 @@
-<div id="header">
-  <h1><%= link_to 'Instagram Viewer', '/' %></h1>
-  <h2>Photos by <%= @photo.user.full_name %></h2>
-</div>
-<div id="content" class="hfeed">
+<%= content_for :title, "Photos by #{@photo.user.full_name}" %>
 <%= render :partial => 'photos', :object => @photos %>
 <p id="nav">
   <%= link_to "Next Photos",
               "/user/#{@photo.user.id}/max_id/#{@photo.id}",
               :rel => 'next' %>
 </p>
-</div>

@@ -2,9 +2,9 @@
 body { background: #efead6; margin: 20px 40px; font-size: 90%; }
 a { color: #996633; }
 img { border: none; }
-h1 { width: 280px; float: left; }
+h1 { width: 260px; float: left; }
 h1 a { text-decoration: none; color: #333333; }
-h2 { padding: 7px 0 0 30px; }
+h2 { padding: 8px 0 0 30px; }
 #content { margin-top: 20px; width: 800px; position: relative; clear: both; }
 .post { width: 160px; float: left; }
 .full { display: none; }
@@ -15,4 +15,5 @@ h2 { padding: 7px 0 0 30px; }
 .comment { margin-top: 5px; }
 .comment .full_name { color: #996633; }
 .comment .created_at { color: #aaaaaa; }
+#nav { clear: both; }
 #footer { padding: 20px 0 0; clear: both; }

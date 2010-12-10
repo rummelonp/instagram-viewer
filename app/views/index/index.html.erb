@@ -1,7 +1,2 @@
-<div id="header">
-  <h1><%= link_to 'Instagram Viewer', '/' %></h1>
-  <h2>Pppular Photos</h2>
-</div>
-<div id="content" class="hfeed">
+<%= content_for :title, "Popular" %>
 <%= render :partial => 'photos', :object => @photos %>
-</div>

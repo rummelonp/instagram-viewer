@@ -1,8 +1,6 @@
 <% @photos.each do |photo| %>
 <div class="post hentry <%= photo.id %>">
-  <% min = photo.images.first %>
-  <% mid = photo.images.at 1 %>
-  <% max = photo.images.last %>
+  <% min, mid, max = sort_images_by_size photo.images %>
   <div class="thumbnail entry-summary">
     <div class="photo">
       <%= link_to (image_tag min.url,
