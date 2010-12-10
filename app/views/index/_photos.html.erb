@@ -23,7 +23,7 @@
                    :alt => photo.caption,
                    :title => photo.caption),
                   max.url,
-                  :onclick => "open(this.href); return false;" %>
+                  :rel => 'external nofollow' %>
     </div>
     <div class="full_name author">
       <%= link_to photo.user.full_name, "/user/#{photo.user.id}" %>
