@@ -1,4 +1,4 @@
-<%= content_for :title, "Photos by #{@photo.user.full_name}" %>
+<%= content_for :title, "Photos by #{@photo.user.username}" %>
 <%= render :partial => 'photos', :object => @photos %>
 <% if @photos.length >= 20 %>
 <p id="nav">
