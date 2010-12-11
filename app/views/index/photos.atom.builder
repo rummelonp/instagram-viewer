@@ -15,6 +15,8 @@ xml.feed "xml:lang" => "ja", :xmlns => 'http://www.w3.org/2005/Atom' do
       if @popular
         xml.link :rel => 'alternate', :type => 'text/html', :href => "/user/#{photo.user.id}"
         xml.author { xml.name photo.user.username }
+      else
+        xml.link :rel => 'alternate', :type => 'text/html', :href => max.url
       end
       xml.content :type => 'xhtml' do |content|
         content.div :xmlns => "http://www.w3.org/1999/xhtml" do
@@ -25,7 +27,7 @@ xml.feed "xml:lang" => "ja", :xmlns => 'http://www.w3.org/2005/Atom' do
                         :alt => photo.caption,
                         :titie => photo.caption
           end
-          content.p "#{photo.likers.size} likes this" unless photo.likers.empty?
+          content.p "#{photo.likers.length} likes this" unless photo.likers.empty?
         end
       end
     end

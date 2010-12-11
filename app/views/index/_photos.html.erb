@@ -18,6 +18,9 @@
     <div class="username author">
       <%= link_to photo.user.username, "/user/#{photo.user.id}" %>
     </div>
+    <div class="caption entry-title">
+      <%= photo.caption %>
+    </div>
     <div class="token_at updated">
       <%= photo.taken_at.strftime('%Y/%m/%d %H:%M') %>
     </div>
@@ -28,7 +31,7 @@
         <%= link_to liker.username, "/user/#{liker.id}" %>
       </span>,
       <% end %>
-      likes this
+      <%= photo.likers.length %> likes this
     </div>
     <% end %>
     <div class="comments">

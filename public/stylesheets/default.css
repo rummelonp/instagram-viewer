@@ -8,7 +8,7 @@ h2 { padding: 8px 0 0 30px; }
 #content { margin-top: 20px; width: 800px; position: relative; clear: both; }
 .post { width: 160px; float: left; }
 .full { display: none; }
-#full .full { display: block; width: 350px; height: 90%; position: fixed; top: 5%; left: 860px; overflow: scroll; }
+#full .full { display: block; width: 320px; height: 90%; padding: 10px; position: fixed; top: 5%; left: 860px; overflow: scroll; }
 .token_at { color: #aaaaaa; }
 .likers { margin-top: 5px; }
 .comments { margin-top: 10px; }
