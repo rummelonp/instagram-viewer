@@ -9,11 +9,11 @@ h2 { padding: 8px 0 0 30px; }
 .post { width: 160px; float: left; }
 .full { display: none; }
 #full .full { display: block; width: 350px; height: 90%; position: fixed; top: 5%; left: 860px; overflow: scroll; }
-.caption { margin-top: 10px; }
 .token_at { color: #aaaaaa; }
+.liker { margin-top: 15px; }
 .comments { margin-top: 10px; }
 .comment { margin-top: 5px; }
-.comment .full_name { color: #996633; }
-.comment .created_at { color: #aaaaaa; }
+.comment .username { color: #996633; }
+.comment .created_at { font-size: 90%; color: #aaaaaa; }
 #nav { clear: both; }
 #footer { padding: 20px 0 0; clear: both; }

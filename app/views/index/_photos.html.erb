@@ -15,23 +15,29 @@
                   max.url,
                   :rel => 'external nofollow' %>
     </div>
-    <div class="full_name author">
-      <%= link_to photo.user.full_name, "/user/#{photo.user.id}" %>
-    </div>
-    <div class="caption entry-title">
-      <%= photo.caption %>
+    <div class="username author">
+      <%= link_to photo.user.username, "/user/#{photo.user.id}" %>
     </div>
     <div class="token_at updated">
       <%= photo.taken_at.strftime('%Y/%m/%d %H:%M') %>
     </div>
+    <% if photo.likers.length > 0 %>
+    <div class="likers">
+      <% photo.likers.each do |liker| %>
+      <span class="liker">
+        <%= link_to liker.username, "/user/#{liker.id}" %>
+      </span>, likes this
+      <% end %>
+    </div>
+    <% end %>
     <div class="comments">
       <% photo.comments.each do |comment| %>
       <p class="comment">
         <span class="text">
           <%= comment.text %>
         </span>
-        <span class="full_name">
-          <%= comment.user.full_name %>
+        <span class="username">
+          <%= link_to comment.user.username, "/user/#{photo.user.id}" %>
         </span>
         <span class="created_at">
           <%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
