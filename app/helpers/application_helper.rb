@@ -6,4 +6,12 @@ module ApplicationHelper
     end
   end
 
+  def photo_image_tag(image, photo)
+    image_tag image.url,
+              :width => image.width,
+              :height => image.height,
+              :alt => photo.caption,
+              :title => photo.caption
+  end
+
 end

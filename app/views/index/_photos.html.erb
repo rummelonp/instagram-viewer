@@ -3,11 +3,7 @@
   <% min, mid, max = sort_images_by_size photo.images %>
   <div class="thumbnail entry-summary">
     <div class="photo">
-      <%= link_to (image_tag min.url,
-                   :width => min.width,
-                   :height => min.height,
-                   :alt => photo.caption,
-                   :title => photo.caption),
+      <%= link_to (photo_image_tag min, photo),
                   max.url,
                   :rel => 'bookmark',
                   :onclick => "showFullPost(#{photo.id}); return false;" %>
@@ -15,11 +11,7 @@
   </div>
   <div class="full entry-content">
     <div class="photo">
-      <%= link_to (image_tag mid.url,
-                   :width => mid.width,
-                   :heigth => mid.height,
-                   :alt => photo.caption,
-                   :title => photo.caption),
+      <%= link_to (photo_image_tag mid, photo),
                   max.url,
                   :rel => 'external nofollow' %>
     </div>
