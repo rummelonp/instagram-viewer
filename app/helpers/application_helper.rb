@@ -5,5 +5,5 @@ module ApplicationHelper
       image.width * image.height
     end
   end
-  
+
 end
