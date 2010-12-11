@@ -1,5 +1,5 @@
 * { margin: 0; padding: 0; color: #333333; line-height: 1.5; font-family: Helvetica, Arial, sans-serif; }
-body { background: #efead6; margin: 20px 40px; font-size: 90%; }
+body { background: #efead6; min-width: 1200px; margin: 20px 40px; font-size: 90%; }
 a { color: #996633; }
 img { border: none; }
 h1 { width: 260px; float: left; }
