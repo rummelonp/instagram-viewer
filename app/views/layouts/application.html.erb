@@ -20,13 +20,7 @@
 <% end %>
 </head>
 <body>
-<div id="header">
-  <h1><%= link_to 'Instagram Viewer', '/' %></h1>
-  <h2><%= @title %></h2>
-</div>
-<div id="content" class="hfeed">
-  <%= yield %>
-</div>
+<%= yield %>
 <div id="footer">
   &copy;2010 <%= link_to 'Instagram', 'http://instagr.am/' %> |
   @<%= link_to 'mitukiii', 'http://twitter.com/mitukiii' %> 

@@ -1,9 +1,21 @@
-<% content_for :atom_url, "/user/#{@photos.last.user.id}.atom" %>
+<% content_for :atom_url, "/user/#{@user.id}.atom" %>
+<div id="header">
+  <h1><%= link_to 'Instagram Viewer', '/' %></h1>
+  <h2><%= @title %></h2>
+  <div id="user_info">
+    <%= @user.full_name %> / 
+    <%= @user.following %> Following /
+    <%= @user.followers %> Followers /
+    <%= @user.media_count %> Photos
+  </div>
+</div>
+<div id="content" class="hfeed">
 <%= render :partial => 'photos', :object => @photos %>
 <% if @photos.length >= 20 %>
 <p id="nav">
   <%= link_to "Next Photos",
-              "/user/#{@photos.last.user.id}/max_id/#{@photos.last.id}",
+              "/user/#{@user.id}/max_id/#{@photos.last.id}",
               :rel => 'next' %>
 </p>
 <% end %>
+</div>

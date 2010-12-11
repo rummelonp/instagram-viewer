@@ -16,7 +16,8 @@ class IndexController < ApplicationController
   def user
     id = params.delete :id
     @photos = Instagram::Cached::by_user id, params
-    @title  = "Photos by #{@photos.first.user.username}"
+    @user   = Instagram::Cached::user_info id
+    @title  = "Photos by #{@user.username}"
 
     respond_to do |format|
       format.html

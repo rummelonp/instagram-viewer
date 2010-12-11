@@ -31,7 +31,7 @@
       <% photo.likers.each do |liker| %>
       <span class="liker">
         <%= link_to liker.username, "/user/#{liker.id}" %>
-      </span>,
+      </span>, 
       <% end %>
       <%= photo.likers.length %> likes this
     </div>
