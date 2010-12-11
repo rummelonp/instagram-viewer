@@ -10,7 +10,7 @@ h2 { padding: 8px 0 0 30px; }
 .full { display: none; }
 #full .full { display: block; width: 350px; height: 90%; position: fixed; top: 5%; left: 860px; overflow: scroll; }
 .token_at { color: #aaaaaa; }
-.liker { margin-top: 15px; }
+.likers { margin-top: 5px; }
 .comments { margin-top: 10px; }
 .comment { margin-top: 5px; }
 .comment .username { color: #996633; }
