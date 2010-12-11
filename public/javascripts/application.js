@@ -1,9 +1,11 @@
 var showFullPost = function(post_id) {
-  var post = document.getElementById('full');
-  if (post) {
-    post.id = '';
+  var before = document.getElementById('full');
+  if (before) {
+    before.id = '';
   }
-  document.getElementsByClassName(post_id)[0].id = 'full';
+  var current = document.getElementsByClassName(post_id)[0];
+  current.id = 'full';
+  return before === current;
 };
 
 window.onload = function() {
