@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title><%= yield :title %> - Instagram Viewer</title>
+<title><%= @title %> - Instagram Viewer</title>
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-18367987-4']);
@@ -15,11 +15,14 @@
 </script>
 <%= javascript_include_tag 'application' %>
 <%= stylesheet_link_tag :all %>
+<% if yield :atom_url %>
+<link href="<%= yield :atom_url %>" rel="alternate" title="<%= @title %> - Instagram Viewer" type="application/atom+xml">
+<% end %>
 </head>
 <body>
 <div id="header">
   <h1><%= link_to 'Instagram Viewer', '/' %></h1>
-  <h2><%= yield :title %></h2>
+  <h2><%= @title %></h2>
 </div>
 <div id="content" class="hfeed">
   <%= yield %>

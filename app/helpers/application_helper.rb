@@ -14,4 +14,8 @@ module ApplicationHelper
               :title => photo.caption
   end
 
+  def schema_date
+    Time.now.year
+  end
+
 end

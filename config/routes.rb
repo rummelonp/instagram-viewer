@@ -1,6 +1,7 @@
 Instagram::Application.routes.draw do
 
   root :to => "index#index"
+  get "popular" => "index#index"
 
   get "user/:id" => "index#user"
   get "user/:id/max_id/:max_id" => "index#user"

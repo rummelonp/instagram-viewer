@@ -1,9 +1,9 @@
-<%= content_for :title, "Photos by #{@photo.user.username}" %>
+<% content_for :atom_url, "/user/#{@photos.last.user.id}.atom" %>
 <%= render :partial => 'photos', :object => @photos %>
 <% if @photos.length >= 20 %>
 <p id="nav">
   <%= link_to "Next Photos",
-              "/user/#{@photo.user.id}/max_id/#{@photo.id}",
+              "/user/#{@photos.last.user.id}/max_id/#{@photos.last.id}",
               :rel => 'next' %>
 </p>
 <% end %>
