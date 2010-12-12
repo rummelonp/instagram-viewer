@@ -2,6 +2,12 @@
 <div id="header">
   <h1><%= link_to 'Instagram Viewer', '/' %></h1>
   <h2><%= @title %></h2>
+  <div id="search">
+    <%= form_tag :action => :find do %>
+    <p><%= text_field_tag :url %></p>
+    <p><%= submit_tag "Find User by Permalink" %></p>
+    <% end %>
+  </div>
 </div>
 <div id="content" class="hfeed">
 <%= render :partial => 'photos', :object => @photos %>
