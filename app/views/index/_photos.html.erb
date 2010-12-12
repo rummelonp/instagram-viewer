@@ -43,7 +43,7 @@
           <%= comment.text %>
         </span>
         <span class="username">
-          <%= link_to comment.user.username, "/user/#{photo.user.id}" %>
+          <%= link_to comment.user.username, "/user/#{comment.user.id}" %>
         </span>
         <span class="created_at">
           <%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
