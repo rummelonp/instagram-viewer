@@ -29,7 +29,7 @@ class IndexController < ApplicationController
   end
 
   def find
-    return redirect_to "/" unless params[:url] =~ %r{http://instagr.am/p/[\w\d]+/}
+    return redirect_to "/" unless params[:url] =~ %r{http://instagr.am/p/.+/}
 
     url = Addressable::URI.parse params[:url]
     if Instagram::Cached::send(:get_url, url) =~ %r{profiles/profile_(\d+)_}
