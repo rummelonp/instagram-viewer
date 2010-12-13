@@ -1,16 +1,23 @@
-var showFullPost = function(post_id) {
-  var before = document.getElementById('full');
-  if (before) {
-    before.id = '';
+
+var onClickDocument = function(event) {
+  var post = Event.findElement(event, '.post');
+  if (Object.isElement(post)) {
+    if (event.altKey || event.ctlrKey ||
+        event.metaKey || event.shiftKey)
+    {
+      return;
+    }
+    var current = $('full');
+    Object.isElement(current) &&
+      current.writeAttribute('id', null);
+    post.writeAttribute('id', 'full');
+    Event.stop(event);
   }
-  var current = document.getElementsByClassName(post_id)[0];
-  current.id = 'full';
-  return before === current;
 };
 
-window.onload = function() {
-  var post = document.getElementById('full');
-  if (!post) {
-    document.getElementsByClassName('post')[0].id = 'full';
-  }
-};
+document.observe('dom:loaded', function(event) {
+  var post = $$('.post').first();
+  post.writeAttribute('id', 'full');
+}.bindAsEventListener(), false);
+
+document.observe('click', onClickDocument.bindAsEventListener(), false);

@@ -13,7 +13,7 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
-<%= javascript_include_tag 'application' %>
+<%= javascript_include_tag "prototype", "application" %>
 <%= stylesheet_link_tag :all %>
 <% if yield :atom_url %>
 <link href="<%= yield :atom_url %>" rel="alternate" title="<%= @title %> - Instagram Viewer" type="application/atom+xml">
