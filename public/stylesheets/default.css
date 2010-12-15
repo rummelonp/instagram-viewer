@@ -7,6 +7,7 @@ h1 a { text-decoration: none; color: #333333; }
 h2 { padding: 8px 0 0 30px; }
 #find { clear: both }
 #find p { display: inline; }
+#find .notice { display: block; margin-top: 10px; color: #996633; }
 #user_info { clear: both; }
 #content { margin-top: 20px; width: 800px; position: relative; clear: both; }
 .post { width: 160px; float: left; }

@@ -27,7 +27,7 @@ xml.feed "xml:lang" => "ja", :xmlns => 'http://www.w3.org/2005/Atom' do
                         :alt => photo.caption,
                         :titie => photo.caption
           end
-          content.p "#{photo.likers.length} likes this" if @popular && !photo.likers.empty?
+          content.p "#{photo.likers.length} likes this" if @popular and not photo.likers.empty?
         end
       end
     end

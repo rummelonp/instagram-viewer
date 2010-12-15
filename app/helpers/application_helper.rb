@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def nl2br(text)
+    text.gsub('\n', '<br />').html_safe
+  end
+
   def sort_images_by_size(images)
     images.sort_by do |image|
       image.width * image.height

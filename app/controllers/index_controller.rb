@@ -29,13 +29,35 @@ class IndexController < ApplicationController
   end
 
   def find
-    return redirect_to "/" unless params[:url] =~ %r{http://instagr.am/p/.+/}
-
-    url = Addressable::URI.parse params[:url]
-    if Instagram::Cached::send(:get_url, url) =~ %r{profiles/profile_(\d+)_}
-      redirect_to "/user/#{$1}"
-    else
-      redirect_to "/"
+    begin
+      id = discover_user_id(params[:url])
+      if id
+        url = "/user/#{id}"
+        if request.xhr?
+          render :text => "location.href='#{url}'"
+        else
+          redirect_to url
+        end
+      else
+        text  = 'Sorry, the user id could not find on this page.\n'
+        text += 'Can not find user if user does not setting icon.'
+        if request.xhr?
+          render :text => "alert('#{text}')"
+        else
+          flash[:notice] = text
+          redirect_to '/'
+        end
+      end
+    rescue
+      text  = 'Sorry, the user id could not find because of an error.\n'
+      text += 'Please input instagr.am permalink.\n'
+      text += '(example: http://instagr.am/p/hpqA/)'
+      if request.xhr?
+        render :text => "alert('#{text}')"
+      else
+        flash[:notice] = text
+        redirect_to '/'
+      end
     end
   end
 

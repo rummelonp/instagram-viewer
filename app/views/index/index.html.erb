@@ -7,6 +7,9 @@
     <p><%= text_field_tag :url %></p>
     <p><%= submit_tag "Find User by Permalink" %></p>
     <% end %>
+    <% if flash[:notice] %>
+    <p class="notice"><%= nl2br flash[:notice] %></p>
+    <% end %>
   </div>
 </div>
 <div id="content" class="hfeed">

@@ -25,7 +25,7 @@
     <div class="token_at updated">
       <%= photo.taken_at.strftime('%Y/%m/%d %H:%M') %>
     </div>
-    <% if photo.likers.length > 0 %>
+    <% unless photo.likers.empty? %>
     <div class="likers">
       <% photo.likers.each do |liker| %>
       <span class="liker">
