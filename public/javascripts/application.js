@@ -1,31 +1,35 @@
 
 var onClickDocument = function(event) {
-  var post = Event.findElement(event, '.post');
-  if (Object.isElement(post)) {
+  var thumbnail = event.findElement('.thumbnail');
+  if (Object.isElement(thumbnail)) {
     if (event.altKey || event.ctlrKey ||
         event.metaKey || event.shiftKey)
     {
       return;
     }
-    Event.stop(event);
+    event.stop();
     var current = $('full');
     Object.isElement(current) &&
       current.writeAttribute('id', null);
+    var post = event.findElement('.post');
     post.writeAttribute('id', 'full');
   }
 };
 
 var onSubmitFindForm = function(event) {
-  var form = Event.element(event);
-  Event.stop(event);
-  form.request();
+  event.stop();
+  var form = event.element();
+  form.request({
+    onCreate: function() { form.disable(); },
+    onComplete: function() { form.enable(); }
+  });
 };
 
 document.observe('dom:loaded', function(event) {
   var post = $$('.post').first();
   post.writeAttribute('id', 'full');
   var form = $$('#find form').first();
-  form.addEventListener('submit', onSubmitFindForm, false);
+  form.observe('submit', onSubmitFindForm.bindAsEventListener(), false);
 }.bindAsEventListener(), false);
 
 document.observe('click', onClickDocument.bindAsEventListener(), false);
