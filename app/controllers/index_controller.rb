@@ -1,6 +1,7 @@
 class IndexController < ApplicationController
 
   def index
+    cached_setup :expires_in => 30.minutes
     @photos = Instagram::Cached::popular
     @title  = "Popular Photos"
 
@@ -15,7 +16,9 @@ class IndexController < ApplicationController
 
   def user
     id = params.delete :id
+    cached_setup :expires_in => 30.minutes
     @photos = Instagram::Cached::by_user id, params
+    cached_setup :expires_in => 1.hour
     @user   = Instagram::Cached::user_info id
     @title  = "Photos by #{@user.username}"
 

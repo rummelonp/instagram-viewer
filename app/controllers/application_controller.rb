@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  Instagram::Cached::setup RAILS_CACHE.cache_path, :expires_in => 10.minutes
+  def cached_setup(options = {})
+    Instagram::Cached::setup RAILS_CACHE.cache_path, options
+  end
 
   def discover_user_id(url)
     url = Addressable::URI.parse url unless url.respond_to? :host
