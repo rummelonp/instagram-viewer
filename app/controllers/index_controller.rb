@@ -1,7 +1,7 @@
 class IndexController < ApplicationController
 
   def index
-    cached_setup :expires_in => 30.minutes
+    cached_setup :expires_in => 15.minutes
     @photos = Instagram::Cached::popular
     @title  = "Popular Photos"
 
@@ -16,9 +16,9 @@ class IndexController < ApplicationController
 
   def user
     id = params.delete :id
-    cached_setup :expires_in => 30.minutes
-    @photos = Instagram::Cached::by_user id, params
     cached_setup :expires_in => 1.hour
+    @photos = Instagram::Cached::by_user id, params
+    cached_setup :expires_in => 2.hour
     @user   = Instagram::Cached::user_info id
     @title  = "Photos by #{@user.username}"
 
@@ -42,8 +42,8 @@ class IndexController < ApplicationController
           redirect_to url
         end
       else
-        text  = 'Sorry, the user id could not find on this page.\n'
-        text += 'Can not find user if user does not setting icon.'
+        text = ['Sorry, the user id could not find on this page.',
+                'Can not find user if user does not setting icon.'].join('\n')
         if request.xhr?
           render :text => "alert('#{text}')"
         else
@@ -52,9 +52,9 @@ class IndexController < ApplicationController
         end
       end
     rescue
-      text  = 'Sorry, the user id could not find because of an error.\n'
-      text += 'Please input instagr.am permalink.\n'
-      text += '(example: http://instagr.am/p/hpqA/)'
+      text = ['Sorry, the user id could not find because of an error.',
+              'Please input instagr.am permalink.',
+              '(example: http://instagr.am/p/hpqA/)'].join('\n')
       if request.xhr?
         render :text => "alert('#{text}')"
       else
