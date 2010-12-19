@@ -1,6 +1,6 @@
 class IndexController < ApplicationController
 
-  def index
+  def popular
     cached_setup :expires_in => 15.minutes
     @photos = Instagram::Cached::popular
     @title  = "Popular Photos"
