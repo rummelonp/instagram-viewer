@@ -2,12 +2,11 @@ Instagram::Application.routes.draw do
 
   root :to => "index#index"
 
-  match "/popular" => "index#index"
+  get "/popular" => "index#index"
 
-  match "/find" => "index#find"
+  get "/user/:id(/max_id/:max_id)" => "index#user"
 
-  match "/user/:id" => "index#user"
-  match "/user/:id/max_id/:max_id" => "index#user"
+  post "/find" => "index#find"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
