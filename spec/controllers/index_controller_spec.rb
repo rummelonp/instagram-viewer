@@ -75,6 +75,17 @@ describe IndexController do
         it { should be_eql '/' }
       end
     end
+
+    describe :flash do
+      describe :notice do
+        subject { request.session['flash'][:notice] }
+        it do
+          should be_eql ['Sorry, the user id could not find because of an error.',
+                         'Please input instagr.am permalink.',
+                         '(example: http://instagr.am/p/hpqA/)'].join('\n')
+        end
+      end
+    end
   end
 
 end
