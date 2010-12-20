@@ -1,5 +1,3 @@
-require 'active_support/cache'
-
 module Instagram
   class FailsafeStore < ActiveSupport::Cache::FileStore
     # Reuses the stale cache if a known exception occurs while yielding to the block.

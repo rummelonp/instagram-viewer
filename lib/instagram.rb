@@ -1,6 +1,8 @@
 require 'addressable/uri'
 require 'addressable/template'
 require 'instagram/models'
+require 'instagram/failsafe_store'
+require 'instagram/cached'
 
 module Instagram
 
@@ -33,9 +35,9 @@ module Instagram
   end
 
   def get_url(url)
-    response = Net::HTTP.start(url.host, url.port) { |http|
+    response = Net::HTTP.start(url.host, url.port) do |http|
       http.get url.request_uri
-    }
+    end
 
     if Net::HTTPSuccess === response
       response.body
