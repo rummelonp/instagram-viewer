@@ -88,4 +88,23 @@ describe IndexController do
     end
   end
 
+  describe 'POST "find", url=http://instagr.am/p/hpqA/' do
+    before { post :find, url: 'http://instagr.am/p/hpqA/' }
+
+    describe :routes do
+      subject { {post: '/find', url: 'http://instagr.am/p/hpqA/'} }
+      it { should route_to(controller: 'index', action: 'find') }
+    end
+
+    describe :response do
+      subject { response }
+      it { should be_redirect }
+
+      describe :redirect_to do
+        subject { URI.parse(response.redirect_url).request_uri }
+        it { should be_eql '/user/982876' }
+      end
+    end
+  end
+
 end
