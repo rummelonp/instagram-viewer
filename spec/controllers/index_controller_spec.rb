@@ -59,6 +59,9 @@ describe IndexController do
     describe :response do
       subject { response }
       it { should be_redirect }
+      it 'redirect_url should be "/"' do
+        URI.parse(response.redirect_url).request_uri.should == '/'
+      end
     end
   end
 
