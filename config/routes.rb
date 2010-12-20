@@ -1,4 +1,4 @@
-Instagram::Application.routes.draw do
+InstagramViewer::Application.routes.draw do
 
   get "/(popular)" => "index#popular", as: :popular
 

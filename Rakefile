@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-Instagram::Application.load_tasks
+InstagramViewer::Application.load_tasks
