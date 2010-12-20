@@ -11,5 +11,10 @@ require 'spec_helper'
 #   end
 # end
 describe ApplicationHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  describe 'nl2br "test text1.\ntest text2.\n"' do
+    subject { nl2br 'test text1.\ntest text2.\n' }
+    it { should == 'test text1.<br />test text2.<br />' }
+  end
+
 end
