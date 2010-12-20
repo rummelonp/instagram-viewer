@@ -12,9 +12,15 @@ require 'spec_helper'
 # end
 describe ApplicationHelper do
 
-  describe 'nl2br "test text1.\ntest text2.\n"' do
-    subject { nl2br 'test text1.\ntest text2.\n' }
-    it { should == 'test text1.<br />test text2.<br />' }
+  describe 'nl2br' do
+    context '"test text1.\ntest text2.\n"' do
+      subject { nl2br 'test text1.\ntest text2.\n' }
+      it { should == 'test text1.<br />test text2.<br />' }
+    end
+    context '"test text1. test text2."' do
+      subject { nl2br 'test text1. test text2.' }
+      it { should == 'test text1. test text2.' }
+    end
   end
 
   describe 'sort_images_by_size' do
