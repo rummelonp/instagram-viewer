@@ -17,4 +17,28 @@ describe ApplicationHelper do
     it { should == 'test text1.<br />test text2.<br />' }
   end
 
+  describe 'sort_images_by_size' do
+    context '[@max, @mid, @min].shuffle' do
+      before(:all) do
+        Image = Struct.new :width, :height
+        @max = Image.new(100, 100)
+        @mid = Image.new(50, 50)
+        @min = Image.new(10, 10)
+      end
+      before do
+        @unsort_images = [@max, @mid, @min].shuffle
+        @sorted_images = sort_images_by_size @unsort_images
+      end
+      it 'first should @min' do
+        @sorted_images.first.should == @min
+      end
+      it 'at 1 should @mid' do
+        @sorted_images.at(1).should == @mid
+      end
+      it 'last should @max' do
+        @sorted_images.last.should == @max
+      end
+    end
+  end
+
 end
