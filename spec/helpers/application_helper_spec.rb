@@ -12,7 +12,7 @@ require 'spec_helper'
 # end
 describe ApplicationHelper do
 
-  describe 'nl2br' do
+  describe :nl2br do
     context '"test text1.\ntest text2.\n"' do
       subject { nl2br 'test text1.\ntest text2.\n' }
       it { should == 'test text1.<br />test text2.<br />' }
@@ -23,14 +23,17 @@ describe ApplicationHelper do
     end
   end
 
-  describe 'sort_images_by_size' do
+  before(:all) do
+    Image = Struct.new :width, :height, :url
+    Photo = Struct.new :caption
+    @max = Image.new(612, 612, '/images/max.png')
+    @mid = Image.new(306, 306, '/images/mid.png')
+    @min = Image.new(150, 150, '/images/min.png')
+    @photo = Photo.new('test caption')
+  end
+
+  describe :sort_images_by_size do
     context '[@max, @mid, @min].shuffle' do
-      before(:all) do
-        Image = Struct.new :width, :height
-        @max = Image.new(100, 100)
-        @mid = Image.new(50, 50)
-        @min = Image.new(10, 10)
-      end
       before do
         @unsort_images = [@max, @mid, @min].shuffle
         @sorted_images = sort_images_by_size @unsort_images
@@ -45,6 +48,28 @@ describe ApplicationHelper do
         @sorted_images.last.should == @max
       end
     end
+  end
+
+  describe :photo_image_tag do
+    context '@min, @photo' do
+      subject { photo_image_tag @max, @photo }
+      it { should be_eql '<img alt="test caption" height="612" src="/images/max.png" title="test caption" width="612" />' }
+    end
+
+    context '@mid, @photo' do
+      subject { photo_image_tag @mid, @photo }
+      it { should be_eql '<img alt="test caption" height="306" src="/images/mid.png" title="test caption" width="306" />' }
+    end
+
+    context '@max, @photo' do
+      subject { photo_image_tag @min, @photo }
+      it { should be_eql '<img alt="test caption" height="150" src="/images/min.png" title="test caption" width="150" />' }
+    end
+  end
+
+  describe :schema_date do
+    subject { schema_date }
+    it { should be_eql Time.now.year }
   end
 
 end
