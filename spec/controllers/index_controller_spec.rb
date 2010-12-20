@@ -3,12 +3,12 @@ require 'spec_helper'
 describe IndexController do
 
   describe 'GET "popular"' do
-    before { get :popular }
-
     describe :routes do
       subject { {get: '/popular'} }
       it { should route_to(controller: 'index', action: 'popular') }
     end
+
+    before { get :popular }
 
     describe :response do
       subject { response }
@@ -17,12 +17,12 @@ describe IndexController do
   end
 
   describe 'GET "popular.atom"' do
-    before { get :popular, format: :atom }
-
     describe :routes do
       subject { {get: '/popular.atom'} }
       it { should route_to(controller: 'index', action: 'popular', format: 'atom') }
     end
+
+    before { get :popular, format: :atom }
 
     describe :response do
       subject { response }
@@ -31,12 +31,12 @@ describe IndexController do
   end
 
   describe 'GET "user/982876"' do
-    before { get :user, id: 982876 }
-
     describe :routes do
       subject { {get: '/user/982876'} }
       it { should route_to(controller: 'index', action: 'user', id: '982876') }
     end
+
+    before { get :user, id: 982876 }
 
     describe :response do
       subject { response }
@@ -45,12 +45,12 @@ describe IndexController do
   end
 
   describe 'GET "user/982876.atom"' do
-    before { get :user, id: 982876, format: :atom }
-
     describe :routes do
       subject { {get: '/user/982876.atom'} }
       it { should route_to(controller: 'index', action: 'user', id: '982876', format: 'atom') }
     end
+
+    before { get :user, id: 982876, format: :atom }
 
     describe :response do
       subject { response }
@@ -59,12 +59,12 @@ describe IndexController do
   end
 
   describe 'POST "find"' do
-    before { post :find }
-
     describe :routes do
       subject { {post: '/find', url: ''} }
       it { should route_to(controller: 'index', action: 'find') }
     end
+
+    before { post :find, url: '' }
 
     describe :response do
       subject { response }
@@ -89,12 +89,12 @@ describe IndexController do
   end
 
   describe 'POST "find", url=http://instagr.am/p/hpqA/' do
-    before { post :find, url: 'http://instagr.am/p/hpqA/' }
-
     describe :routes do
       subject { {post: '/find', url: 'http://instagr.am/p/hpqA/'} }
       it { should route_to(controller: 'index', action: 'find') }
     end
+
+    before { post :find, url: 'http://instagr.am/p/hpqA/' }
 
     describe :response do
       subject { response }
@@ -103,6 +103,48 @@ describe IndexController do
       describe :redirect_to do
         subject { URI.parse(response.redirect_url).request_uri }
         it { should be_eql '/user/982876' }
+      end
+    end
+  end
+
+  describe 'POST "find" requested with XMLHttpRequest' do
+    describe :routes do
+      subject { {post: '/find', url: ''} }
+      it { should route_to(controller: 'index', action: 'find') }
+    end
+
+    before { xhr :post, :find, url: '' }
+
+    describe :response do
+      describe :body do
+        subject { response.body }
+        it do
+          text = ['Sorry, the user id could not find because of an error.',
+                  'Please input instagr.am permalink.',
+                  '(example: http://instagr.am/p/hpqA/)'].join('\n')
+          javascript = "alert('#{text}')"
+          should be_eql javascript
+        end
+      end
+    end
+  end
+
+  describe 'POST "find", url=http://instagr.am/p/hpqA/ requested with XMLHttpRequest' do
+    describe :routes do
+      subject { {post: '/find', url: 'http://instagr.am/p/hpqA/'} }
+      it { should route_to(controller: 'index', action: 'find') }
+    end
+
+    before { xhr :post, :find, url: 'http://instagr.am/p/hpqA/' }
+
+    describe :response do
+      describe :body do
+        subject { response.body }
+        it do
+          url = '/user/982876'
+          javascript = "location.href='#{url}'"
+          should be_eql javascript
+        end
       end
     end
   end
