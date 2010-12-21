@@ -46,73 +46,75 @@ describe IndexController do
   end
 
   describe 'POST "find"' do
-    before { post :find, url: '' }
+    context 'without XMLHttpRequest' do
 
-    describe :response do
-      subject { response }
-      it { should be_redirect }
-
-      describe :redirect_to do
-        subject { URI.parse(response.redirect_url).request_uri }
-        it { should be_eql '/' }
+      context 'with empty url' do
+        before { post :find, url: '' }
+        describe :response do
+          subject { response }
+          it { should be_redirect }
+          describe :redirect_to do
+            subject { URI.parse(response.redirect_url).request_uri }
+            it { should be_eql '/' }
+          end
+        end
+        describe :flash do
+          describe :notice do
+            subject { request.session['flash'][:notice] }
+            it do
+              should be_eql ['Sorry, the user id could not find because of an error.',
+                             'Please input instagr.am permalink.',
+                             '(example: http://instagr.am/p/hpqA/)'].join('\n')
+            end
+          end
+        end
       end
-    end
 
-    describe :flash do
-      describe :notice do
-        subject { request.session['flash'][:notice] }
-        it do
-          should be_eql ['Sorry, the user id could not find because of an error.',
-                         'Please input instagr.am permalink.',
-                         '(example: http://instagr.am/p/hpqA/)'].join('\n')
+      context 'with url http://instagr.am/p/hpqA/' do
+        before { post :find, url: 'http://instagr.am/p/hpqA/' }
+        describe :response do
+          subject { response }
+          it { should be_redirect }
+          describe :redirect_to do
+            subject { URI.parse(response.redirect_url).request_uri }
+            it { should be_eql '/user/982876' }
+          end
         end
       end
     end
-  end
 
-  describe 'POST "find", url=http://instagr.am/p/hpqA/' do
-    before { post :find, url: 'http://instagr.am/p/hpqA/' }
+    context 'with XMLHttpRequest' do
 
-    describe :response do
-      subject { response }
-      it { should be_redirect }
-
-      describe :redirect_to do
-        subject { URI.parse(response.redirect_url).request_uri }
-        it { should be_eql '/user/982876' }
-      end
-    end
-  end
-
-  describe 'POST "find" requested with XMLHttpRequest' do
-    before { xhr :post, :find, url: '' }
-
-    describe :response do
-      describe :body do
-        subject { response.body }
-        it do
-          text = ['Sorry, the user id could not find because of an error.',
-                  'Please input instagr.am permalink.',
-                  '(example: http://instagr.am/p/hpqA/)'].join('\n')
-          javascript = "alert('#{text}')"
-          should be_eql javascript
+      context 'with empty url' do
+        before { xhr :post, :find, url: '' }
+        describe :response do
+          describe :body do
+            subject { response.body }
+            it do
+              text = ['Sorry, the user id could not find because of an error.',
+                      'Please input instagr.am permalink.',
+                      '(example: http://instagr.am/p/hpqA/)'].join('\n')
+              javascript = "alert('#{text}')"
+              should be_eql javascript
+            end
+          end
         end
       end
-    end
-  end
 
-  describe 'POST "find", url=http://instagr.am/p/hpqA/ requested with XMLHttpRequest' do
-    before { xhr :post, :find, url: 'http://instagr.am/p/hpqA/' }
-
-    describe :response do
-      describe :body do
-        subject { response.body }
-        it do
-          url = '/user/982876'
-          javascript = "location.href='#{url}'"
-          should be_eql javascript
+      context 'with url http://instagr.am/p/hpqA/' do
+        before { xhr :post, :find, url: 'http://instagr.am/p/hpqA/' }
+        describe :response do
+          describe :body do
+            subject { response.body }
+            it do
+              url = '/user/982876'
+              javascript = "location.href='#{url}'"
+              should be_eql javascript
+            end
+          end
         end
       end
+
     end
   end
 
