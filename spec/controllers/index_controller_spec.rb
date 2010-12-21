@@ -3,13 +3,7 @@ require 'spec_helper'
 describe IndexController do
 
   describe 'GET "popular"' do
-    describe :routes do
-      subject { {get: '/popular'} }
-      it { should route_to(controller: 'index', action: 'popular') }
-    end
-
     before { get :popular }
-
     describe :response do
       subject { response }
       it { should be_success }
@@ -17,13 +11,7 @@ describe IndexController do
   end
 
   describe 'GET "popular.atom"' do
-    describe :routes do
-      subject { {get: '/popular.atom'} }
-      it { should route_to(controller: 'index', action: 'popular', format: 'atom') }
-    end
-
     before { get :popular, format: :atom }
-
     describe :response do
       subject { response }
       it { should be_success }
@@ -31,13 +19,7 @@ describe IndexController do
   end
 
   describe 'GET "user/982876"' do
-    describe :routes do
-      subject { {get: '/user/982876'} }
-      it { should route_to(controller: 'index', action: 'user', id: '982876') }
-    end
-
     before { get :user, id: 982876 }
-
     describe :response do
       subject { response }
       it { should be_success }
@@ -45,13 +27,7 @@ describe IndexController do
   end
 
   describe 'GET "user/982876.atom"' do
-    describe :routes do
-      subject { {get: '/user/982876.atom'} }
-      it { should route_to(controller: 'index', action: 'user', id: '982876', format: 'atom') }
-    end
-
     before { get :user, id: 982876, format: :atom }
-
     describe :response do
       subject { response }
       it { should be_success }
@@ -59,11 +35,6 @@ describe IndexController do
   end
 
   describe 'POST "find"' do
-    describe :routes do
-      subject { {post: '/find', url: ''} }
-      it { should route_to(controller: 'index', action: 'find') }
-    end
-
     before { post :find, url: '' }
 
     describe :response do
@@ -89,11 +60,6 @@ describe IndexController do
   end
 
   describe 'POST "find", url=http://instagr.am/p/hpqA/' do
-    describe :routes do
-      subject { {post: '/find', url: 'http://instagr.am/p/hpqA/'} }
-      it { should route_to(controller: 'index', action: 'find') }
-    end
-
     before { post :find, url: 'http://instagr.am/p/hpqA/' }
 
     describe :response do
@@ -108,11 +74,6 @@ describe IndexController do
   end
 
   describe 'POST "find" requested with XMLHttpRequest' do
-    describe :routes do
-      subject { {post: '/find', url: ''} }
-      it { should route_to(controller: 'index', action: 'find') }
-    end
-
     before { xhr :post, :find, url: '' }
 
     describe :response do
@@ -130,11 +91,6 @@ describe IndexController do
   end
 
   describe 'POST "find", url=http://instagr.am/p/hpqA/ requested with XMLHttpRequest' do
-    describe :routes do
-      subject { {post: '/find', url: 'http://instagr.am/p/hpqA/'} }
-      it { should route_to(controller: 'index', action: 'find') }
-    end
-
     before { xhr :post, :find, url: 'http://instagr.am/p/hpqA/' }
 
     describe :response do
