@@ -45,15 +45,15 @@ describe IndexController do
           it { should be_redirect }
           describe :redirect_to do
             subject { URI.parse(response.redirect_url).request_uri }
-            it { should be_eql '/' }
+            it { should == '/' }
           end
         end
         describe :flash, :notice do
           subject { request.session['flash'][:notice] }
           it do
-            should be_eql ['Sorry, the user id could not find because of an error.',
-                           'Please input instagr.am permalink.',
-                           '(example: http://instagr.am/p/hpqA/)'].join('\n')
+            should == ['Sorry, the user id could not find because of an error.',
+                       'Please input instagr.am permalink.',
+                       '(example: http://instagr.am/p/hpqA/)'].join('\n')
           end
         end
       end
@@ -65,7 +65,7 @@ describe IndexController do
           it { should be_redirect }
           describe :redirect_to do
             subject { URI.parse(response.redirect_url).request_uri }
-            it { should be_eql '/user/982876' }
+            it { should == '/user/982876' }
           end
         end
       end
@@ -82,7 +82,7 @@ describe IndexController do
                     'Please input instagr.am permalink.',
                     '(example: http://instagr.am/p/hpqA/)'].join('\n')
             javascript = "alert('#{text}')"
-            should be_eql javascript
+            should == javascript
           end
         end
       end
@@ -94,7 +94,7 @@ describe IndexController do
           it do
             url = '/user/982876'
             javascript = "location.href='#{url}'"
-            should be_eql javascript
+            should == javascript
           end
         end
       end
