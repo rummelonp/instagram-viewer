@@ -58,6 +58,25 @@ describe IndexController do
         end
       end
 
+      context 'with invalid url http://instagr.am/' do
+        before { post :find, url: 'http://instagr.am/' }
+        describe :response do
+          subject { response }
+          it { should be_redirect }
+          describe :redirect_to do
+            subject { URI.parse(response.redirect_url).request_uri }
+            it { should == '/' }
+          end
+        end
+        describe :flash, :notice do
+          subject { request.session['flash'][:notice] }
+          it do
+            should == ['Sorry, the user id could not find on this page.',
+                       'Can not find user if user does not setting icon.'].join('\n')
+          end
+        end
+      end
+
       context 'with url http://instagr.am/p/hpqA/' do
         before { post :find, url: 'http://instagr.am/p/hpqA/' }
         describe :response do
@@ -81,6 +100,19 @@ describe IndexController do
             text = ['Sorry, the user id could not find because of an error.',
                     'Please input instagr.am permalink.',
                     '(example: http://instagr.am/p/hpqA/)'].join('\n')
+            javascript = "alert('#{text}')"
+            should == javascript
+          end
+        end
+      end
+
+      context 'with invalid url http://instagr.am/' do
+        before { xhr :post, :find, url: 'http://instagr.am/' }
+        describe :response, :body do
+          subject { response.body }
+          it do
+            text = ['Sorry, the user id could not find on this page.',
+                    'Can not find user if user does not setting icon.'].join('\n')
             javascript = "alert('#{text}')"
             should == javascript
           end
