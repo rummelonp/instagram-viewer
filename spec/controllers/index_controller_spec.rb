@@ -38,6 +38,18 @@ describe IndexController do
   describe 'POST "find"' do
     context 'without XMLHttpRequest' do
 
+      context 'with url http://instagr.am/p/hpqA/' do
+        before { post :find, url: 'http://instagr.am/p/hpqA/' }
+        describe :response do
+          subject { response }
+          it { should be_redirect }
+          describe :redirect_to do
+            subject { URI.parse(response.redirect_url).request_uri }
+            it { should == '/user/982876' }
+          end
+        end
+      end
+
       context 'with empty url' do
         before { post :find, url: '' }
         describe :response do
@@ -58,10 +70,10 @@ describe IndexController do
         end
       end
 
-      context 'with invalid url http://instagr.am/p/hpqa/' do
+      context "with url who user hasn't set an icon" do
         before do
           Instagram::Cached::stub(:discover_user_id).and_return(nil)
-          post :find, url: 'http://instagr.am/p/hpqa/'
+          post :find, url: 'http://instagr.am/p/hpqA/'
         end
         describe :response do
           subject { response }
@@ -80,20 +92,21 @@ describe IndexController do
         end
       end
 
-      context 'with url http://instagr.am/p/hpqA/' do
-        before { post :find, url: 'http://instagr.am/p/hpqA/' }
-        describe :response do
-          subject { response }
-          it { should be_redirect }
-          describe :redirect_to do
-            subject { URI.parse(response.redirect_url).request_uri }
-            it { should == '/user/982876' }
-          end
-        end
-      end
     end
 
     context 'with XMLHttpRequest' do
+
+      context 'with url http://instagr.am/p/hpqA/' do
+        before { xhr :post, :find, url: 'http://instagr.am/p/hpqA/' }
+        describe :response, :body do
+          subject { response.body }
+          it do
+            url = '/user/982876'
+            javascript = "location.href='#{url}'"
+            should == javascript
+          end
+        end
+      end
 
       context 'with empty url' do
         before { xhr :post, :find, url: '' }
@@ -109,10 +122,10 @@ describe IndexController do
         end
       end
 
-      context 'with invalid url http://instagr.am/p/hpqa/' do
+      context "with url who user hasn't set an icon" do
         before do
           Instagram::Cached::stub(:discover_user_id).and_return(nil)
-          xhr :post, :find, url: 'http://instagr.am/p/hpqa/'
+          xhr :post, :find, url: 'http://instagr.am/p/hpqA/'
         end
         describe :response, :body do
           subject { response.body }
@@ -120,18 +133,6 @@ describe IndexController do
             text = ['Sorry, the user id could not find on this page.',
                     'Can not find user if user does not setting icon.'].join('\n')
             javascript = "alert('#{text}')"
-            should == javascript
-          end
-        end
-      end
-
-      context 'with url http://instagr.am/p/hpqA/' do
-        before { xhr :post, :find, url: 'http://instagr.am/p/hpqA/' }
-        describe :response, :body do
-          subject { response.body }
-          it do
-            url = '/user/982876'
-            javascript = "location.href='#{url}'"
             should == javascript
           end
         end
