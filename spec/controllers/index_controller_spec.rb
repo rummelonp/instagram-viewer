@@ -58,8 +58,11 @@ describe IndexController do
         end
       end
 
-      context 'with invalid url http://instagr.am/' do
-        before { post :find, url: 'http://instagr.am/' }
+      context 'with invalid url http://instagr.am/p/hpqa/' do
+        before do
+          Instagram::Cached::stub(:discover_user_id).and_return(nil)
+          post :find, url: 'http://instagr.am/p/hpqa/'
+        end
         describe :response do
           subject { response }
           it { should be_redirect }
@@ -106,8 +109,11 @@ describe IndexController do
         end
       end
 
-      context 'with invalid url http://instagr.am/' do
-        before { xhr :post, :find, url: 'http://instagr.am/' }
+      context 'with invalid url http://instagr.am/p/hpqa/' do
+        before do
+          Instagram::Cached::stub(:discover_user_id).and_return(nil)
+          xhr :post, :find, url: 'http://instagr.am/p/hpqa/'
+        end
         describe :response, :body do
           subject { response.body }
           it do

@@ -34,6 +34,7 @@ class IndexController < ApplicationController
   def find
     begin
       Instagram::Cached::setup expires_in: 1.day
+      raise if params[:url] !~ %r{http://instagr.am/p/[^/]+/?}
       id = Instagram::Cached::discover_user_id(params[:url])
       if id
         url = "/user/#{id}"
