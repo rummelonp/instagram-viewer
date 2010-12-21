@@ -3,34 +3,45 @@ require 'spec_helper'
 describe IndexController do
 
   describe 'GET "popular"' do
-    before { get :popular }
-    describe :response do
-      subject { response }
-      it { should be_success }
+    context :html do
+      before { get :popular }
+      describe :response do
+        subject { response }
+        it { should be_success }
+      end
     end
-  end
-
-  describe 'GET "popular.atom"' do
-    before { get :popular, format: :atom }
-    describe :response do
-      subject { response }
-      it { should be_success }
+    context :atom do
+      before { get :popular, format: :atom }
+      describe :response do
+        subject { response }
+        it { should be_success }
+      end
     end
   end
 
   describe 'GET "user/982876"' do
-    before { get :user, id: 982876 }
-    describe :response do
-      subject { response }
-      it { should be_success }
+    context :html do
+      context 'without_max_id' do
+        before { get :user, id: '982876' }
+        describe :response do
+          subject { response }
+          it { should be_success }
+        end
+      end
+      context 'with_max_id "9578621"' do
+        before { get :user, id: '982876', max_id: '9578621' }
+        describe :response do
+          subject { response }
+          it { should be_success }
+        end
+      end
     end
-  end
-
-  describe 'GET "user/982876.atom"' do
-    before { get :user, id: 982876, format: :atom }
-    describe :response do
-      subject { response }
-      it { should be_success }
+    context :atom do
+      before { get :user, id: '982876', format: :atom }
+      describe :response do
+        subject { response }
+        it { should be_success }
+      end
     end
   end
 
