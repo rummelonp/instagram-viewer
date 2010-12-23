@@ -5,19 +5,20 @@ img { border: none; }
 h1 { width: 260px; float: left; }
 h1 a { text-decoration: none; color: #333333; }
 h2 { padding: 8px 0 0 30px; }
-#find { clear: both }
-#find p { display: inline; }
-#find .notice { display: block; margin-top: 10px; color: #996633; }
-#user_info { clear: both; }
-#content { margin-top: 20px; width: 800px; position: relative; clear: both; }
-.post { width: 160px; float: left; }
-.full { display: none; }
-#full .full { display: block; width: 320px; height: 90%; padding: 10px; position: fixed; top: 5%; left: 860px; overflow: scroll; }
-.token_at { color: #aaaaaa; }
-.likers { margin-top: 5px; }
-.comments { margin-top: 10px; }
-.comment { margin-top: 5px; }
-.comment .username { color: #996633; }
-.comment .created_at { font-size: 90%; color: #aaaaaa; }
+#header #find { clear: both }
+#header #find p { display: inline; }
+#header #find .notice { display: block; margin-top: 10px; color: #996633; }
+#header #user_info { clear: both; }
+#content.photos { margin-top: 20px; width: 800px; position: relative; clear: both; }
+#content.photos .post { width: 160px; float: left; }
+#content.photos .full { display: none; }
+#content.photos #full .full { display: block; width: 320px; height: 90%; padding: 10px; position: fixed; top: 5%; left: 860px; overflow: scroll; }
+#content.photos .entry-title { display: none; }
+#content.photos .token_at { color: #aaaaaa; }
+#content.photos .likers { margin-top: 5px; }
+#content.photos .comments { margin-top: 10px; }
+#content.photos .comment { margin-top: 5px; }
+#content.photos .comment .username { color: #996633; }
+#content.photos .comment .created_at { font-size: 90%; color: #aaaaaa; }
 #nav { clear: both; }
 #footer { padding: 20px 0 0; clear: both; }

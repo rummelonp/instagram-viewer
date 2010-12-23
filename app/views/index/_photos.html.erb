@@ -1,6 +1,9 @@
 <% @photos.each do |photo| %>
 <div class="post hentry <%= photo.id %>">
   <% min, mid, max = sort_images_by_size photo.images %>
+  <div class="entry-title">
+    <%= photo.caption %>
+  </div>
   <div class="thumbnail entry-summary">
     <div class="photo">
       <%= link_to (photo_image_tag min, photo),
@@ -19,10 +22,10 @@
     <div class="username author">
       <%= link_to photo.user.username, "/user/#{photo.user.id}" %>
     </div>
-    <div class="caption entry-title">
+    <div class="caption">
       <%= photo.caption %>
     </div>
-    <div class="token_at updated">
+    <div class="token_at published">
       <%= photo.taken_at.strftime('%Y/%m/%d %H:%M') %>
     </div>
     <% unless photo.likers.empty? %>

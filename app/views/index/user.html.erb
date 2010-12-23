@@ -9,7 +9,7 @@
     <%= @user.media_count %> Photos
   </div>
 </div>
-<div id="content" class="hfeed">
+<div id="content" class="photos hfeed">
 <%= render :partial => 'photos', :object => @photos %>
 <% if @photos.length >= 20 %>
 <p id="nav">
